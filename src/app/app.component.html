@@ -1,0 +1,13 @@
+<main>
+  <img class="sp-logo" src="assets/images/superpowered-black.svg"/>
+  <img class="angular-logo" src="assets/images/angular_solidBlack.svg"/>
+  <h3>The following example will take your microphone and <br />pass it through WebAssembly Superpowered Reverb</h3>
+  <h4>Please wear headphones or turn down you speakers!</h4>
+  <button class="start-buton" mat-raised-button *ngIf="!booted" (click)="boot()" color="primary">Start tone</button>
+
+  <div class="engine-stats" *ngIf="booted">
+    <span>Sample rate: {{engineStats.sampleRate/1000}} kHz</span>
+    <span>Estimated latecy: {{engineStats.estimatedLatency.toFixed(3)}} s</span>
+  </div>
+
+</main>
