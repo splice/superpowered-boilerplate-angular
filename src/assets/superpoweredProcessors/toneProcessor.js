@@ -21,6 +21,10 @@ class SuperpoweredSingleGeneratorStageProcessor extends SuperpoweredWebAudio.Aud
   }
 
   processAudio(inputBuffer, outputBuffer, buffersize, parameters) {
+      // Ensure the samplerate is in sync on every audio processing callback
+      this.generator.samplerate = this.samplerate;
+
+	    // Render the output buffers
       this.generator.generate(
           this.genOutputBuffer.pointer, // output, // Pointer to floating point numbers. 32-bit MONO output.
           buffersize   // number of samples to generae
