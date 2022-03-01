@@ -23,16 +23,7 @@ export class AudioEngineService {
 
   loadSuperpoweredLibrary = async (wasmPublicLocation: any) => {
     this.superpowered = await SuperpoweredGlue.fetch(wasmPublicLocation);
-    this.superpowered.Initialize({
-      licenseKey: 'ExampleLicenseKey-WillExpire-OnNextUpdate',
-      enableAudioAnalysis: true,
-      enableFFTAndFrequencyDomain: true,
-      enableAudioTimeStretching: true,
-      enableAudioEffects: true,
-      enableAudioPlayerAndDecoder: true,
-      enableCryptographics: false,
-      enableNetworking: false,
-    });
+    this.superpowered.Initialize('ExampleLicenseKey-WillExpire-OnNextUpdate');
     this.initted = true;
     this.webaudioManager = new SuperpoweredWebAudio(
       minimumSampleRate,
