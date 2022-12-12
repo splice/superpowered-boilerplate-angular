@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
 // @ts-ignore
-import { SuperpoweredGlue } from '../lib/superpowered/SuperpoweredGlueModule';
-// @ts-ignore
-import { SuperpoweredWebAudio } from '../lib/superpowered/SuperpoweredWebAudio';
+import '../assets/js/Superpowered.js';
 
 const minimumSampleRate = 48000;
+const superPoweredLocation = "/assets/Superpowered.js";
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +21,14 @@ export class AudioEngineService {
   audioInputNode;
 
   loadSuperpoweredLibrary = async (wasmPublicLocation: any) => {
-    this.superpowered = await SuperpoweredGlue.fetch(wasmPublicLocation);
-    this.superpowered.Initialize('ExampleLicenseKey-WillExpire-OnNextUpdate');
+    // @ts-ignore
+    this.superpowered = await SuperpoweredGlue.Instantiate(
+      'ExampleLicenseKey-WillExpire-OnNextUpdate',
+      superPoweredLocation
+    );
+    console.log(`Running Superpowered v${this.superpowered.Version()}`);
     this.initted = true;
+      // @ts-ignore
     this.webaudioManager = new SuperpoweredWebAudio(
       minimumSampleRate,
       this.superpowered
